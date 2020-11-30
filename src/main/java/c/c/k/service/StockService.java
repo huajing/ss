@@ -2,7 +2,8 @@ package c.c.k.service;
 
 
 import c.c.k.domain.Stock;
-import c.c.k.domain.User;
+
+import java.util.Optional;
 
 /**
  * @Title chen.ce.kuan.service
@@ -12,5 +13,6 @@ import c.c.k.domain.User;
  */
 public interface StockService {
     public void save(Stock stock);
-    public void getStock(int stockId);
+    public Optional<Stock> getStock(Long stockId);
+    public Optional<Stock> getStock(String code);
 }

@@ -25,8 +25,8 @@ public class Test {
     public void test001() {
 
         fetchData("sh6", 1000, 1100);
-        fetchData("sz0", 1, 100);
-        fetchData("sz3", 1, 100);
+//        fetchData("sz0", 1, 100);
+//        fetchData("sz3", 1, 100);
     }
     private void fetchData(String which, int start, int end){
         String s = HttpUtil.get(url + getCode(which, start, end));

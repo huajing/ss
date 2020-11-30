@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getUser(int userId) {
+    public void getUser(Long userId) {
         //userRepository.findById(userId).get().
     }
 }

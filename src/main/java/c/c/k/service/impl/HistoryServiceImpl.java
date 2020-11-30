@@ -31,7 +31,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public void getUser(int userId) {
+    public void getUser(Long userId) {
         //userRepository.findById(userId).get().
     }
 }

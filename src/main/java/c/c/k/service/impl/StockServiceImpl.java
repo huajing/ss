@@ -6,10 +6,12 @@ import c.c.k.repository.StockRepository;
 import c.c.k.repository.UserRepository;
 import c.c.k.service.StockService;
 import c.c.k.service.UserService;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * @Title chen.ce.kuan.service.impl
@@ -25,15 +27,21 @@ public class StockServiceImpl implements StockService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(Stock stock) {
-        //user.setId(35);
-        stockRepository.save(stock);
-
-        //测试异常是否回滚
-        //throw new RuntimeException("abc");
+        if(this.getStock(stock.getCode()) == null) {
+            stockRepository.save(stock);
+        }
     }
 
     @Override
-    public void getStock(int stockId) {
-        //userRepository.findById(userId).get().
+    public Optional<Stock> getStock(Long stockId) {
+        return stockRepository.findById(stockId);
+    }
+
+    @Override
+    public Optional<Stock> getStock(String code) {
+        Stock stock = new Stock();
+        stock.setCode(code);
+        Example<Stock> example = Example.of(stock);
+        return stockRepository.findOne(example);
     }
 }

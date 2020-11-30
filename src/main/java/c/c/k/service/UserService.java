@@ -11,5 +11,5 @@ import c.c.k.domain.User;
  */
 public interface UserService {
     public void save(User user);
-    public void getUser(int userId);
+    public void getUser(Long userId);
 }

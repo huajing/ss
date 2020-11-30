@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Entity
@@ -16,6 +17,12 @@ public class History implements Serializable{
     private Long id;
 
     private String name;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Date dataTime;
 
     private Long stockId;
 
