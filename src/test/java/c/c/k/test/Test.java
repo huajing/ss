@@ -5,12 +5,16 @@ import c.c.k.domain.Stock;
 import c.c.k.service.StockService;
 import cn.hutool.http.HttpUtil;
 import lombok.extern.log4j.Log4j2;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
 
 @Log4j2
 @RunWith(SpringRunner.class)
@@ -20,6 +24,29 @@ public class Test {
     private StockService stockService;
 
     private static String url = "http://hq.sinajs.cn/list=";
+    //http://api.k780.com/?app=finance.stock_list&category=hs&appkey=55908&sign=75ee1f7439f159617a96d653520e9dc6&format=json
+    public static void main(String[] args) {
+
+    }
+
+    @org.junit.Test
+    public void testList() {
+        try {
+            JSONObject parse = (JSONObject)JSONValue.parse(new FileInputStream("list.txt"));
+            JSONArray array = (JSONArray) ((JSONObject)parse.get("result")).get("lists");
+            for (Object o : array) {
+                JSONObject jsonObject = (JSONObject)o;
+                String symbol = jsonObject.getAsString("symbol");
+                String sname = jsonObject.getAsString("sname");
+                Stock stock = new Stock();
+                stock.setCode(symbol);
+                stock.setName(sname);
+                stockService.save(stock);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @org.junit.Test
     public void test001() {
@@ -39,7 +66,6 @@ public class Test {
             String substring2 = s1.substring(idx1 + 1);
             if(substring2.length()>10) {
                 Stock stock = new Stock();
-                stock.setCity(which.startsWith("sh")?1:2);
                 stock.setCode(substring1);
                 stock.setName(substring2.split(",")[0]);
                 stockService.save(stock);

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -18,12 +19,17 @@ public class History implements Serializable{
 
     private String name;
 
-    private Date createTime;
+    private LocalDate createTime;
 
     private Date updateTime;
 
     private Date dataTime;
 
     private Long stockId;
+
+    private Long startPrice;
+
+    private Long endPrice;
+
 
 }

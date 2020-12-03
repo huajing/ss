@@ -27,7 +27,8 @@ public class StockServiceImpl implements StockService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(Stock stock) {
-        if(this.getStock(stock.getCode()) == null) {
+        Optional<Stock> stock1 = this.getStock(stock.getCode());
+        if(!stock1.isPresent()) {
             stockRepository.save(stock);
         }
     }
